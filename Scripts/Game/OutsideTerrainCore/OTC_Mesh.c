@@ -45,9 +45,9 @@ class OTC_Mesh
 		{
 			for (int x = 0; x < resolution; x++)
 			{
-				_x = (x / zeroBasedResolution - 0.5) * height;
+				_x = (x / zeroBasedResolution - 0.5) * width;
 				_y = heights[verticleIndex];
-				_z = (y / zeroBasedResolution - 0.5) * width;
+				_z = (y / zeroBasedResolution - 0.5) * height;
 				
 				verticles[verticleIndex++] = Vector(_x, _y, _z);
 				
