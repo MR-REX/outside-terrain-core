@@ -1,0 +1,4 @@
+MatCommon {
+ Color 0.014 0.014 0.014 1
+ AlbedoMap "{86A2731AF6879DC8}Common/Textures/OutsideTerrainCore/DefaultTexture.edds"
+}

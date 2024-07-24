@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{FCDCBAF69074F24C}Common/Textures/OutsideTerrain/DefaultMaterial.emat"
+ Name "{FCDCBAF69074F24C}Common/Textures/OutsideTerrainCore/DefaultMaterial.emat"
  Configurations {
   EMATResourceClass PC {
   }

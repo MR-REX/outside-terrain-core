@@ -23,7 +23,7 @@ class OTC_OutsideTerrainChunkEntity : GenericEntity
 	[Attribute(category: "Physics", defvalue: EPhysicsLayerPresets.Terrain.ToString(), enums: ParamEnumArray.FromEnum(EPhysicsLayerPresets), uiwidget: UIWidgets.ComboBox, desc: "Physics layer mask preset for physics body of mesh")]
 	protected EPhysicsLayerPresets m_ePhysicsLayerPreset; 
 	
-	[Attribute(category: "Texture", defvalue: "{FCDCBAF69074F24C}Common/Textures/OutsideTerrain/DefaultMaterial.emat", params: "emat", uiwidget: UIWidgets.ResourcePickerThumbnail, desc: "Material of mesh")]
+	[Attribute(category: "Texture", defvalue: "{FCDCBAF69074F24C}Common/Textures/OutsideTerrainCore/DefaultMaterial.emat", params: "emat", uiwidget: UIWidgets.ResourcePickerThumbnail, desc: "Material of mesh")]
 	protected ResourceName m_Material;
 	
 	// Enforce Script: Why I can't use constaint values from another class when trying to create static array?
