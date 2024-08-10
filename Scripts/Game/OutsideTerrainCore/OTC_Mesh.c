@@ -5,40 +5,31 @@ class OTC_Mesh
 	static const int MAX_UVS = MAX_VERTICES * 2;
 	static const int MAX_INDICES = (MAX_VERTICES * 6) - ((MAX_RESOLUTION - 1) * 6 * 2);
 	
-	protected vector verticles[MAX_VERTICES];
-	protected int verticlesCount;
+	protected vector m_aVertices[MAX_VERTICES];
+	protected int m_iVerticesCount;
 	
-	protected float uvs[MAX_UVS];
-	protected int uvsCount;
+	protected float m_aUV[MAX_UVS];
+	protected int m_iUVCount;
 	
-	protected int indices[MAX_INDICES];
-	protected int indicesCount;
+	protected int m_aIndices[MAX_INDICES];
+	protected int m_iIndicesCount;
 	
 	void OTC_Mesh(array<float> heights, int resolution, float width, float height)
 	{
 		if (resolution < 2 || resolution > MAX_RESOLUTION)
-		{
-			Print("Mesh resolution should be more than 2, but less than " + MAX_RESOLUTION, LogLevel.ERROR);
 			return;
-		}
 		
 		if (resolution % 2 != 0)
-		{
-			Print("Mesh resolution must be multiple of 2", LogLevel.ERROR);
 			return;
-		}
 		
 		if (heights.Count() < resolution * resolution)
-		{
-			Print("Length of heights array is less than mesh resolution", LogLevel.ERROR);
 			return;
-		}
 		
 		const int zeroBasedResolution = resolution - 1;
 		
-		// Create arrays for Verticles and UVs
+		// Create arrays for Vertices and UVs
 		
-		int verticleIndex, uvIndex;
+		int verticeIndex, uvIndex;
 		float _x, _y, _z;
 
 		for (int y = 0; y < resolution; y++)
@@ -46,68 +37,66 @@ class OTC_Mesh
 			for (int x = 0; x < resolution; x++)
 			{
 				_x = (x / zeroBasedResolution - 0.5) * width;
-				_y = heights[verticleIndex];
+				_y = heights[verticeIndex];
 				_z = (y / zeroBasedResolution - 0.5) * height;
 				
-				verticles[verticleIndex++] = Vector(_x, _y, _z);
+				m_aVertices[verticeIndex++] = Vector(_x, _y, _z);
 				
-				uvs[uvIndex++] = x / zeroBasedResolution;
-				uvs[uvIndex++] = 1 - y / zeroBasedResolution;
+				m_aUV[uvIndex++] = x / zeroBasedResolution;
+				m_aUV[uvIndex++] = 1 - y / zeroBasedResolution;
 			}
 		}
 		
-		verticlesCount = verticleIndex;
-		uvsCount = uvIndex;
+		m_iVerticesCount = verticeIndex;
+		m_iUVCount = uvIndex;
 		
 		// Create array of Indices
 		
 		int indiceIndex;
 		int bottomLeft, bottomRight, topLeft, topRight;
 		
-		for (int s = 0; s < verticleIndex - resolution; s++)
+		for (int s = 0; s < verticeIndex - resolution; s++)
 		{
 			if (s % resolution == zeroBasedResolution)
-			{
 				continue;
-			}
 			
 			bottomLeft = s;
 			bottomRight = s + 1;
 			topLeft = bottomLeft + resolution;
 			topRight = bottomRight + resolution;
 			
-			indices[indiceIndex++] = bottomLeft;
-			indices[indiceIndex++] = topLeft;
-			indices[indiceIndex++] = topRight;
+			m_aIndices[indiceIndex++] = bottomLeft;
+			m_aIndices[indiceIndex++] = topLeft;
+			m_aIndices[indiceIndex++] = topRight;
 			
-			indices[indiceIndex++] = topRight;
-			indices[indiceIndex++] = bottomRight;
-			indices[indiceIndex++] = bottomLeft;
+			m_aIndices[indiceIndex++] = topRight;
+			m_aIndices[indiceIndex++] = bottomRight;
+			m_aIndices[indiceIndex++] = bottomLeft;
 		}
 		
-		indicesCount = indiceIndex;
+		m_iIndicesCount = indiceIndex;
 	}
 	
 	bool IsValid()
 	{
-		return (verticlesCount > 0) && (uvsCount > 0) && (indicesCount > 0);
+		return (m_iVerticesCount > 0) && (m_iUVCount > 0) && (m_iIndicesCount > 0);
 	}
 	
-	void GetVerticles(out vector _verticles[MAX_VERTICES], out int _verticlesCount)
+	void GetVertices(out vector vertices[MAX_VERTICES], out int verticesCount)
 	{
-		_verticles = verticles;
-		_verticlesCount = verticlesCount;
+		vertices = m_aVertices;
+		verticesCount = m_iVerticesCount;
 	}
 	
-	void GetUVs(out float _uvs[MAX_UVS], out int _uvsCount)
+	void GetUVs(out float uvs[MAX_UVS], out int uvsCount)
 	{
-		_uvs = uvs;
-		_uvsCount = uvsCount;
+		uvs = m_aUV;
+		uvsCount = m_iUVCount;
 	}
 	
-	void GetIndices(out int _indices[MAX_INDICES], out int _indicesCount)
+	void GetIndices(out int indices[MAX_INDICES], out int indicesCount)
 	{
-		_indices = indices;
-		_indicesCount = indicesCount;
+		indices = m_aIndices;
+		indicesCount = m_iIndicesCount;
 	}
 }

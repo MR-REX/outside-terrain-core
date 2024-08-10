@@ -34,10 +34,10 @@ class OTC_OutsideTerrainChunkEntity : GenericEntity
 	
 	void SetMesh(notnull OTC_Mesh mesh, ResourceName material)
 	{
-		vector verticles[MAX_MESH_VERTICES];
-		int verticlesCount;
+		vector vertices[MAX_MESH_VERTICES];
+		int verticesCount;
 		
-		mesh.GetVerticles(verticles, verticlesCount);
+		mesh.GetVertices(vertices, verticesCount);
 		
 		float uvs[MAX_MESH_UVS];
 		int uvsCount;
@@ -49,7 +49,7 @@ class OTC_OutsideTerrainChunkEntity : GenericEntity
 		
 		mesh.GetIndices(indices, indicesCount);
 		
-		int numVerts[] = { verticlesCount };
+		int numVerts[] = { verticesCount };
 		int numIndices[] = { indicesCount };
 		string materials[] = { material };
 		
@@ -58,7 +58,7 @@ class OTC_OutsideTerrainChunkEntity : GenericEntity
 		
 		MeshObject meshObject = baseResourceObject.ToMeshObject();
 		
-		meshObject.UpdateVerts(0, verticles, uvs);
+		meshObject.UpdateVerts(0, vertices, uvs);
 		meshObject.UpdateIndices(0, indices);
 		
 		SetObject(meshObject, "");
@@ -66,17 +66,17 @@ class OTC_OutsideTerrainChunkEntity : GenericEntity
 	
 	void SetMeshPhysics(notnull OTC_Mesh mesh, ResourceName material)
 	{
-		vector verticles[MAX_MESH_VERTICES];
-		int verticlesCount;
+		vector vertices[MAX_MESH_VERTICES];
+		int verticesCount;
 		
-		mesh.GetVerticles(verticles, verticlesCount);
+		mesh.GetVertices(vertices, verticesCount);
 		
 		int indices[MAX_MESH_INDICES];
 		int indicesCount;
 		
 		mesh.GetIndices(indices, indicesCount);
 		
-		PhysicsGeom geometry = PhysicsGeom.CreateTriMesh(verticles, indices, verticlesCount, indicesCount);
+		PhysicsGeom geometry = PhysicsGeom.CreateTriMesh(vertices, indices, verticesCount, indicesCount);
 		PhysicsGeomDef geometryDefinition = new PhysicsGeomDef("Terrain", geometry, material, 0xffffffff);
 
 		PhysicsGeomDef geometryDefinitions[] = { geometryDefinition };
@@ -88,9 +88,7 @@ class OTC_OutsideTerrainChunkEntity : GenericEntity
 		Physics physics = GetPhysics();
 		
 		if (!physics)
-		{
 			return false;
-		}
 		
 		physics.SetInteractionLayer(physicsLayerPreset);
 		
@@ -101,17 +99,8 @@ class OTC_OutsideTerrainChunkEntity : GenericEntity
 	{
 		OTC_Mesh mesh = new OTC_Mesh(m_aHeights, m_iResolution, m_fWidth, m_fHeight);
 		
-		if (!mesh.IsValid())
-		{
-			Print("Failed to create mesh", LogLevel.ERROR);
+		if (!mesh.IsValid() || !m_Material)
 			return;
-		}
-		
-		if (!m_Material)
-		{
-			Print("Mesh material is required", LogLevel.ERROR);
-			return;
-		}
 		
 		SetMesh(mesh, m_Material);
 		
