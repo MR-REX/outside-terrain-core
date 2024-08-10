@@ -28,13 +28,13 @@ class OTC_OutsideTerrainChunkEntity : GenericEntity
 	
 	// Enforce Script: Why I can't use constaint values from another class when trying to create static array?
 	// It's a bad solution, but I don't know how to do this better yet
-	private const int MAX_MESH_VERTICLES = OTC_Mesh.MAX_VERTICLES;
+	private const int MAX_MESH_VERTICES = OTC_Mesh.MAX_VERTICES;
 	private const int MAX_MESH_UVS = OTC_Mesh.MAX_UVS;
 	private const int MAX_MESH_INDICES = OTC_Mesh.MAX_INDICES;
 	
 	void SetMesh(notnull OTC_Mesh mesh, ResourceName material)
 	{
-		vector verticles[MAX_MESH_VERTICLES];
+		vector verticles[MAX_MESH_VERTICES];
 		int verticlesCount;
 		
 		mesh.GetVerticles(verticles, verticlesCount);
@@ -66,7 +66,7 @@ class OTC_OutsideTerrainChunkEntity : GenericEntity
 	
 	void SetMeshPhysics(notnull OTC_Mesh mesh, ResourceName material)
 	{
-		vector verticles[MAX_MESH_VERTICLES];
+		vector verticles[MAX_MESH_VERTICES];
 		int verticlesCount;
 		
 		mesh.GetVerticles(verticles, verticlesCount);

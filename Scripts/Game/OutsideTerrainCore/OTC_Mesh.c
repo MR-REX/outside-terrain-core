@@ -1,11 +1,11 @@
 class OTC_Mesh
 {
 	static const int MAX_RESOLUTION = 32;
-	static const int MAX_VERTICLES = MAX_RESOLUTION * MAX_RESOLUTION;
-	static const int MAX_UVS = MAX_VERTICLES * 2;
-	static const int MAX_INDICES = (MAX_VERTICLES * 6) - ((MAX_RESOLUTION - 1) * 6 * 2);
+	static const int MAX_VERTICES = MAX_RESOLUTION * MAX_RESOLUTION;
+	static const int MAX_UVS = MAX_VERTICES * 2;
+	static const int MAX_INDICES = (MAX_VERTICES * 6) - ((MAX_RESOLUTION - 1) * 6 * 2);
 	
-	protected vector verticles[MAX_VERTICLES];
+	protected vector verticles[MAX_VERTICES];
 	protected int verticlesCount;
 	
 	protected float uvs[MAX_UVS];
@@ -93,7 +93,7 @@ class OTC_Mesh
 		return (verticlesCount > 0) && (uvsCount > 0) && (indicesCount > 0);
 	}
 	
-	void GetVerticles(out vector _verticles[MAX_VERTICLES], out int _verticlesCount)
+	void GetVerticles(out vector _verticles[MAX_VERTICES], out int _verticlesCount)
 	{
 		_verticles = verticles;
 		_verticlesCount = verticlesCount;
