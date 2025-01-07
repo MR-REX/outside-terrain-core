@@ -26,7 +26,6 @@ class OTC_OutsideTerrainChunkEntity : GenericEntity
 	[Attribute(category: "Texture", defvalue: "{FCDCBAF69074F24C}Common/Textures/OutsideTerrainCore/DefaultMaterial.emat", params: "emat", uiwidget: UIWidgets.ResourcePickerThumbnail, desc: "Material of mesh")]
 	protected ResourceName m_Material;
 	
-	// Enforce Script: Why I can't use constaint values from another class when trying to create static array?
 	// It's a bad solution, but I don't know how to do this better yet
 	private const int MAX_MESH_VERTICES = OTC_Mesh.MAX_VERTICES;
 	private const int MAX_MESH_UVS = OTC_Mesh.MAX_UVS;
