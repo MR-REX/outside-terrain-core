@@ -1,6 +1,6 @@
 class OTC_Mesh
 {
-	static const int MAX_RESOLUTION = 32;
+	static const int MAX_RESOLUTION = 32 + 1;
 	static const int MAX_VERTICES = MAX_RESOLUTION * MAX_RESOLUTION;
 	static const int MAX_UVS = MAX_VERTICES * 2;
 	static const int MAX_INDICES = (MAX_VERTICES * 6) - ((MAX_RESOLUTION - 1) * 6 * 2);
@@ -17,9 +17,6 @@ class OTC_Mesh
 	void OTC_Mesh(array<float> heights, int resolution, float width, float height)
 	{
 		if (resolution < 2 || resolution > MAX_RESOLUTION)
-			return;
-		
-		if (resolution % 2 != 0)
 			return;
 		
 		if (heights.Count() < resolution * resolution)
